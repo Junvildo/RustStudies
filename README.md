@@ -219,3 +219,49 @@ fn say_hi() {
         return greeting;
     }
     ```
+### Modules
+#### Modules
+* Create a module
+    ```
+    pub mod mod_name {
+        pub fn do_something() {
+            ...
+        }
+    }
+    ```
+
+    ```
+    mod mod_name;
+
+    fn main() {
+        mod_name::do_something();
+    }
+    ```
+
+`pub mod mod_name`
+* Nested modules
+    
+    ```
+    pub mod mod_name {
+        pub mod sub_mod {
+            fn fun_sub_module() {
+                ...
+            }
+        }
+    }
+    ```
+
+    ```
+    mod mod_name;
+
+    fn main() {
+        mod_name::sub_mod::fun_sub_module();
+    }
+    ```
+#### Crates
+* Multiple modules are grouped into a crate
+* Two types:
+    * binary crates (have main fn).
+    * library crates (doesn't have main fn).
+* Cargo is used to manage crates.
+* External crates are imported into the project must be added to the toml file.

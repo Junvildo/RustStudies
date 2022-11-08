@@ -1,0 +1,1 @@
+/home/manasuma/git/RustStudies/modules/target/debug/modules: /home/manasuma/git/RustStudies/modules/src/main.rs /home/manasuma/git/RustStudies/modules/src/utils/archive.rs /home/manasuma/git/RustStudies/modules/src/utils/player.rs /home/manasuma/git/RustStudies/modules/src/utils.rs
