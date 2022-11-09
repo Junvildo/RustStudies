@@ -446,3 +446,90 @@ struct Point<T,V> {
 ```
 
 `let p3: Point<i32, f64> = Point{x:5,y:5.34};`
+## Control Structures
+### If statement
+```
+if logical_expression {
+    functionality for true
+}
+```
+
+```
+if logical_expression {
+    functionality for true
+} else {
+        functionality for false
+}
+```
+
+```
+if expression1 {
+    functionality for expression1 true
+} else if expression2 {
+    functionality for expression2 true
+} else {
+    functionality for both expression false
+}
+```
+
+If statement can return a result
+
+```
+let res = if expr1 {
+    result for true
+} else {
+    result for false
+}
+```
+### Match statement
+Similar to when or switch in other languages
+
+```
+match expression {
+    expr1 => {...}
+    expr2 => {...}
+    _ => {...}
+}
+```
+
+Can return a reuslt
+
+Ranges are allowed
+### Pattern Matching
+Multiple values 1|2
+
+Ranges 1..=5
+
+Conditions x if a > b
+
+Tuple matching
+### For loop
+Loop through a collection or range, execute code for each element
+
+```
+for element in collection {
+    functionality
+}
+```
+
+Continue will skip a step
+
+Break will stop the loop
+### While loop
+Loop as long as a condition is true
+
+```
+while condition {
+    ...
+}
+```
+
+Continue will skip a step
+
+Break will stop the loop
+
+```
+loop {              //while true {
+    ...
+}
+```
