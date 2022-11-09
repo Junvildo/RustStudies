@@ -265,3 +265,184 @@ fn say_hi() {
     * library crates (doesn't have main fn).
 * Cargo is used to manage crates.
 * External crates are imported into the project must be added to the toml file.
+## Data Types
+### Arrays
+A collection of values of the same type
+
+`let primes = [2, 3, 5, 7, 11];`
+
+`let doubles: [f64; 4] = [2.0, 4.0, 6.0, 8.0];`
+
+* Static - cannot be resized
+* Element values can be modified but not deleted
+* Indexed
+Create array with default values
+
+`let mut numbers = [0;15];`
+
+```
+const DEFAULT: i32 = 3;
+let numbers = [DEFAULT;15];
+```
+
+Updating elements
+
+`numbers[3] = 5;`
+
+Using an iterator
+
+```
+for number in numbers.iter() {
+    println!("{}", number);
+}
+```
+### Vectors
+Arrays of variable size
+
+`let mut primes: Vec<i32> = Vec::new();`
+
+`let mut primes = vec![2, 3, 5];`
+
+Create vectors with default values
+
+`let mut numbers = vec![2;10];`
+
+```
+const DEFAULT: i32 = 6;
+let mut numbers = [DEFAULT;8];
+```
+
+Updating elements
+
+`number[3] = 5;`
+
+Using an iterator
+
+```
+for number in numbers.iter() {
+    println!("{}", number);
+}
+```
+### Slices
+A slice is a pointer to a block of memory
+
+```
+let numbers = [1, 2, 3, 4, 5];
+let slice = &numbers[1..4];
+```
+* Size is determined at runtime
+* Can be used on arrays, vectors and strings
+* Indexed
+
+Mutable slices allowed us to changed values
+### Tuples
+A collection of values of various types
+
+`let person = ("John", 27, true);`
+
+`let person: (&str, i32, bool) = ("John", 27, true);`
+* Static - cannot be resized
+* Element values can be updated
+* Indexed
+* Limited to 12 elements
+
+Accessing elements
+
+`println!("Name: {}", person.0);`
+
+Updating elements
+
+`person.0 = "Jack";`
+
+Destructuring a tuple (number of variables must correspond to number of elements)
+
+`let (name, age, employed) = person;`
+### Structures
+A collection of key-value pairs
+
+```
+struct Employee {
+    name:String,
+    company:String,
+    age:u32
+}
+```
+
+```
+let emp1 = Employee {
+    name:String::from("John"),
+    company:String::from("Google"),
+    age:35
+};
+```
+
+`println!("{}", emp1.name);`
+
+Adding methods to a structures
+
+```
+impl Employee {
+    fn fn_detail(&self) -> String {
+        ...
+    }
+}
+```
+
+A structure can have static methods
+
+```
+impl Employee {
+    fn static_fn_detail() -> String {
+        ...
+    }
+}
+```
+### Enums
+A collection of values
+
+```
+enum Color {
+    Red,
+    Green,
+    Blue
+}
+```
+
+`let my_color = Color::Red;`
+
+`let my_color = Red;`
+
+We can add data types ti enum elements
+
+```
+enum Person{
+    Name(String),
+    Surname(String),
+    Age(u32)
+}
+```
+
+`let person = Name(String::from("Alex"));`
+### Generics
+Allow us to have variable data types
+
+```
+struct Point<T> {
+    x:T,
+    y:T
+}
+```
+
+```
+let p1: Point<i32> = Point {x : 6, y : 8};
+let p2: Point<f64> = Point {x : 3.25, y : 8.43};
+```
+
+```
+struct Point<T,V> {
+    x:T,
+    y:V
+}
+```
+
+`let p3: Point<i32, f64> = Point{x:5,y:5.34};`
