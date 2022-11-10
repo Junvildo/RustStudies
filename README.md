@@ -670,3 +670,95 @@ Designators
 * meta
 * ty
 * tt
+## Traits
+### Traits
+Similar to an interface or abstract class
+
+Add a definition to a structure
+
+```
+trait Name {
+    fn must_implement(&self) -> i32;
+    fn do_action(&self) {...}
+    fn do_non_instance_action() {...}
+}
+```
+
+Can have definition only or default implementation
+
+Can have instance and non-instance action
+
+Implement a trait
+
+```
+impl Name for Person {
+    fn must_implement(&self) -> {42}
+    fn new(name: &str) -> Person {
+        Person{name: name}
+    }
+}
+```
+
+Can provide a constructor
+
+```
+trait Name {
+    fn New(name: &str) -> Self;
+}
+```
+
+`let john = Person::new("John");`
+
+We can add a trait to a structure we didn't create
+
+```
+impl My_Trait for Vec<i32> {
+    ...
+}
+```
+### Generics
+Generics can be limited by traits
+
+```
+fn color<T: Colorable> (a:T) {
+    ...
+}
+```
+### dynu (returning traits)
+
+The compiler needs to know the space required for a function return type
+
+A workaround is to return a box with a dyn trait.
+
+```
+fn get_animal() -> Box<dyn Animal> {
+    ...
+}
+```
+
+dyn is a new addition to the language, old code might not have it
+### Operator overloading
+We can implement standard operators for our custom structs
+
+`use std::ops::Add;`
+
+```
+struct Custom {
+    ...
+}
+```
+
+```
+impl Add for Custom {
+    type Output = Custom;
+    fn add(self: Custom, rhs: Custom) -> Custom {
+        ...
+    }
+}
+```
+
+`custom1 + custom2`
+### Static dispatch (Monomorphization - converting to one form)
+A generic trait will be converted to the required type at compile time
+### Dynamic dispatch
+A generic trait will be converted to the required type at run time
