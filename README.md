@@ -533,3 +533,140 @@ loop {              //while true {
     ...
 }
 ```
+## Functions
+### Functions and Scope
+#### Functions
+```
+fn main() {
+    say_hi();
+}
+
+fn say_hi() {
+println!("Hello there!!!");
+}
+```
+
+```
+fn main() {
+    say_hi("John");
+}
+
+fn say_hi(name: &str) {
+    println!("Hello {}!", name);
+}
+```
+
+```
+fn main() {
+    let mut name = "John";
+    say_hi(&mut name);
+    println!("The new name is {}", name);
+}
+
+fn say_hi(name: &mut &str) {
+    *name = "Alex";
+    println!("Hello {}!", name);
+}
+```
+
+```
+fn main() {
+    let mut name = "John";
+    let greeting = say_hello(&mut name);
+    println!("{}", greeting);
+}
+
+fn say_hello(name: &mut &str) -> String {
+    let greeting = format!("Hello {}", name);
+    greeting
+}
+```
+
+#### Scope
+No memory leaks - no need to manually deallocate variables
+
+```
+{
+    let a = 3;
+}
+println!("a = {}", a);  //error
+```
+
+Global variables can be declared but they are unsafe
+
+`let a = 3;`
+
+```
+fn main() {
+    unsafe {println!("{}", a);}
+}
+```
+### Closures
+A function within a function
+
+An anonymous function, lambda expression
+
+```
+|a: i32, b: i32| println!("{}", a + b);
+|a: i32, b: i32| -> i32 {a + b};
+```
+
+A function can be assigned to a variable
+
+```
+let sum = |a: i32, b: i32| -> i32 { a + b };
+sum(2, 3);
+```
+
+A closure can be generic
+
+```
+let gen = |x| {println!("received {}", x)};
+gen(3);
+```
+### Higher Order Functions
+Functions that take another function as a parameter
+
+```
+fn apply(f: fn(i32) -> i32, a: i32) {
+
+}
+```
+
+`apply(|x| -> x + 1, a);`
+### Macros
+Write code that writes code - meta programming
+
+Match an expression and perform some operation
+
+Code is expanded and compiled
+
+```
+macro_rules! my_macro {
+    (match) => ( code to run )
+}
+```
+
+`my_macro!`
+
+`println!("This is an {} macro", "awesome");`
+
+We can match multiple expressors
+
+```
+macro_rules! my_macro {
+    (match1) => (code to run)
+    (match2) => (code to run)
+}
+```
+
+Designators
+* expr
+* ident
+* block
+* stmt
+* pat
+* path
+* meta
+* ty
+* tt
