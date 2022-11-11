@@ -762,3 +762,54 @@ impl Add for Custom {
 A generic trait will be converted to the required type at compile time
 ### Dynamic dispatch
 A generic trait will be converted to the required type at run time
+## Memory management
+### Ownership
+Only one variable can own a piece of memory
+
+For primitive types, copying data is cheap
+
+For complex types, ownership is transferred
+### Borrowing
+Only one variable can own a piece of memory
+
+Variables can borrow ownership to other pieces of memory
+
+```
+let a = 6;
+let b = &a;
+```
+
+`println!("{}", *b);`
+
+`a += 2;    //error`
+
+The borrow has to match the mutability
+### Lifetimes
+An indication of how long an object will live
+
+Rust prevents parts of objects outliving the object
+
+```
+struct Object<'lifetime> {
+    field: &'lifetime str
+}
+```
+
+Lifetime elision - compiler builds lifetimes for us when evident
+### Reference counted variables
+A structure that can hold multiple references to a variable
+
+Can be shared in different places
+
+```
+use std::rc::Rc;
+fn do_smth(var: Rc<String>) ...
+```
+
+`let var = Rc::new(String::from("test"));`
+
+`var.clone()`
+
+Count the variable pointers
+
+`Rc::strong_count(&var)`

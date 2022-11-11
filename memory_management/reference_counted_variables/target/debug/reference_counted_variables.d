@@ -1,0 +1,1 @@
+/home/manasuma/git/RustStudies/memory_management/reference_counted_variables/target/debug/reference_counted_variables: /home/manasuma/git/RustStudies/memory_management/reference_counted_variables/src/main.rs
