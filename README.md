@@ -813,3 +813,90 @@ fn do_smth(var: Rc<String>) ...
 Count the variable pointers
 
 `Rc::strong_count(&var)`
+## Error handling
+### Working with files
+Create a file
+
+```
+use std::fs::File
+let mut file = File::create("name.txt").expect("failed");
+```
+
+Write to a file
+
+```
+use std::io::Write;
+file.write_all("Hello".as_byte()).expect("failed");
+```
+
+Append content to file
+
+```
+use std::fs::OpenOptions;
+let mut file = OpenOptions::new().append(true)
+    .open("name.txt").expect("failed");
+file.write_all(" world !\n".as_byte()).expect("failed");
+```
+
+Read from a file
+
+```
+use std::io::Read;
+let mut file = std::fs::File::open("name.txt").unwarp();
+file.read_to_string(&mut contents).unwarp();
+```
+
+Delete a file
+
+```
+use std::fs;
+fs::remove_file("name.txt").expect("failed");
+```
+### Errors
+2 types of errors
+* Recoverable       - Result enum
+* Unrecoverable     - panic! marco
+#### panic!
+Unrecoverable errors
+
+`panic!(message);`
+
+Panic will terminate the program or thread
+#### Recoverable errors
+Result enum
+
+```
+enum Result<T, E> {
+    OK(T),
+    Err(E)
+}
+```
+
+```
+match res {
+    OK(a) => { ... }
+    Err(b) => { ... }
+}
+```
+
+Option enum
+
+```
+enum Option<T, E> {
+    Some(T),
+    None
+}
+```
+### Helper methods
+#### unwarp
+Will return the data if it's available or panic! or it's not
+
+`File::open("example.txt").unwarp();`
+#### expect
+Similar to unwarp but allows us to set a custom error message
+
+`File::open("example.txt").expect("Unable to open file");`
+### ? operator
+A shorthand for an entire match statement
+
+`let mut f=File::open("example.txt")?;`
