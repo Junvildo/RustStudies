@@ -900,3 +900,51 @@ Similar to unwarp but allows us to set a custom error message
 A shorthand for an entire match statement
 
 `let mut f=File::open("example.txt")?;`
+## Concurrency
+### Threads
+Run code in parallel
+
+Ownership/borrowing mechanism gives us
+* memory safety
+* no data races
+#### Create a thread
+```
+use std::thread;
+let th = thread::spawn(closure);
+```
+#### Sleep a thread
+`th::sleep()`
+#### Wait for a thread
+`th.join()`
+### Channels
+A way to send data between threads
+
+MPSC - multiple producer single receiver
+#### Create a channel
+```
+use std::sync::mpsc;
+let (tx, rx) = mpsc::channel();
+```
+#### Send a message
+`tx.send();`
+#### Receive a message
+`rx.recv(); //blocking`
+
+`rx.try_recv(); //non blocking`
+### Mutex
+Mutual exclusion lock
+
+Only one thread can access the data at any one time
+#### Arc - atomically referenced counted type
+convert data into primitive types, safe to share across threads
+#### Create a lock
+```
+use std::sync::{Mutex, Arc};
+let lock = Arc::new(Mutex::new(0));
+```
+#### Acquire a lock
+`lock.lock()`
+
+`lock.try_lock()`
+#### Poisoned lock - when a thread that holds the lock panics
+`lock.in_poisoned()`
